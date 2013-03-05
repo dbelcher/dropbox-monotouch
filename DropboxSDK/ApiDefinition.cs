@@ -268,11 +268,9 @@ namespace DropboxSDK
     [BaseType (typeof (NSObject))]
     [Model]
     interface DBNetworkRequestDelegate {
-        [Abstract]
         [Export ("networkRequestStarted")]
         void Started ();
         
-        [Abstract]
         [Export ("networkRequestStopped")]
         void Stopped ();
     }
@@ -390,184 +388,129 @@ namespace DropboxSDK
     [BaseType (typeof (NSObject))]
     [Model]
     interface DBRestClientDelegate {
-        [Abstract]
         [Export ("restClient:loadedMetadata:"), EventArgs ("Metadata")]
         void MetadataLoaded (DBRestClient client, DBMetadata metadata);
         
-        [Abstract]
         [Export ("restClient:metadataUnchangedAtPath:"), EventArgs ("FilePath")]
         void MetadataUnchangedAtPath (DBRestClient client, string path);
         
-        [Abstract]
         [Export ("restClient:loadMetadataFailedWithError:"), EventArgs ("NSError")]
         void LoadMetadataFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:loadedDeltaEntries:reset:cursor:hasMore:"), EventArgs ("Entries")]
         void DeltaEntriesLoaded (DBRestClient client, NSArray entries, bool shouldReset, string cursor, bool hasMore);
         
-        [Abstract]
         [Export ("restClient:loadDeltaFailedWithError:"), EventArgs ("NSError")]
         void LoadDeltaFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:loadedAccountInfo:"), EventArgs ("AccountInfo")]
         void AccountInfoLoaded (DBRestClient client, DBAccountInfo info);
         
-        [Abstract]
         [Export ("restClient:loadAccountInfoFailedWithError:"), EventArgs ("NSError")]
         void LoadAccountInfoFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:loadedFile:"), EventArgs ("FilePath")]
         void FileLoaded (DBRestClient client, string destPath);
         
-        [Abstract]
         [Export ("restClient:loadedFile:contentType:metadata:"), EventArgs ("FilePathTypeMetadata")]
         void FileMetadataLoaded (DBRestClient client, string destPath, string contentType, DBMetadata metadata);
         
-        [Abstract]
         [Export ("restClient:loadProgress:forFile:"), EventArgs ("Progress")]
         void LoadProgress (DBRestClient client, float progress, string destPath);
         
-        [Abstract]
         [Export ("restClient:loadFileFailedWithError:"), EventArgs ("NSError")]
         void LoadFileFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:loadedThumbnail:metadata:"), EventArgs ("FilePathMetadata")]
         void ThumbnailMetadataLoaded (DBRestClient client, string destPath, DBMetadata metadata);
         
-        [Abstract]
         [Export ("restClient:loadThumbnailFailedWithError:"), EventArgs ("NSError")]
         void LoadThumbnailFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:uploadedFile:from:metadata:"), EventArgs ("FileFromToPathMetadata")]
         void FileMetadataUploaded (DBRestClient client, string destPath, string srcPath, DBMetadata metadata);
         
-        [Abstract]
         [Export ("restClient:uploadProgress:forFile:from:"), EventArgs ("UploadProgress")]
         void UploadProgress (DBRestClient client, float progress, string destPath, string srcPath);
         
-        [Abstract]
         [Export ("restClient:uploadFileFailedWithError:"), EventArgs ("NSError")]
         void UploadFileFailed (DBRestClient client, NSError error);
 
-        //TODO
-        [Abstract]
         [Export ("restClient:uploadedFileChunk:newOffset:fromFile:expires:"), EventArgs ("UploadChunk")]
         void FileChunkUploaded (DBRestClient client, string uploadId, ulong offset, string localPath, NSDate expiresDate);
         
-        [Abstract]
         [Export ("restClient:uploadFileChunkFailedWithError:"), EventArgs ("NSError")]
         void UploadFileChunkFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:uploadedFile:fromUploadId:metadata:"), EventArgs ("FilePathUploadIdMetadata")]
-        void FileWithIdUploaded (DBRestClient client, string destPath, string uploadId, DBMetadata metadata);
+        void FileUploaded (DBRestClient client, string destPath, string uploadId, DBMetadata metadata);
         
-        [Abstract]
         [Export ("restClient:uploadFromUploadIdFailedWithError:"), EventArgs ("NSError")]
         void UploadFromUploadIdFailed (DBRestClient client, NSError error);
         
-        [Abstract]
-        [Export ("restClient:uploadedFile:from:"), EventArgs ("FileFromToPath")]
-        void FileUploaded (DBRestClient client, string destPath, string srcPath);
-        
-        [Abstract]
-        [Export ("restClient:loadedFile:contentType:"), EventArgs ("FilePathType")]
-        void FileWithTypeLoaded (DBRestClient client, string destPath, string contentType);
-        
-        [Abstract]
-        [Export ("restClient:loadedThumbnail:"), EventArgs ("FilePath")]
-        void ThumbnailLoaded (DBRestClient client, string destPath);
-        
-        [Abstract]
         [Export ("restClient:loadedRevisions:forFile:"), EventArgs ("Revision")]
         void RevisionsLoaded (DBRestClient client, NSArray revisions, string path);
         
-        [Abstract]
         [Export ("restClient:loadRevisionsFailedWithError:"), EventArgs ("NSError")]
         void LoadRevisionsFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:restoredFile:"), EventArgs ("Metadata")]
         void FileRestored (DBRestClient client, DBMetadata fileMetadata);
         
-        [Abstract]
         [Export ("restClient:restoreFileFailedWithError:"), EventArgs ("NSError")]
         void RestoreFileFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:createdFolder:"), EventArgs ("Metadata")]
         void FolderCreated (DBRestClient client, DBMetadata folder);
         
-        [Abstract]
         [Export ("restClient:createFolderFailedWithError:"), EventArgs ("NSError")]
         void CreateFolderFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:deletedPath:"), EventArgs ("FilePath")]
         void PathDeleted (DBRestClient client, string path);
         
-        [Abstract]
         [Export ("restClient:deletePathFailedWithError:"), EventArgs ("NSError")]
         void DeletePathFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:copiedPath:to:"), EventArgs ("FilePathMetadata")]
         void PathCopied (DBRestClient client, string fromPath, DBMetadata to);
         
-        [Abstract]
         [Export ("restClient:copyPathFailedWithError:"), EventArgs ("NSError")]
         void CopyPathFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:createdCopyRef:"), EventArgs ("FilePath")]
         void CopyRefCreated (DBRestClient client, string copyRef);
         
-        [Abstract]
         [Export ("restClient:createCopyRefFailedWithError:"), EventArgs ("NSError")]
         void CreateCopyRefFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:copiedRef:to:"), EventArgs ("FilePathMetadata")]
         void RefCopied (DBRestClient client, string copyRef, DBMetadata to);
         
-        [Abstract]
         [Export ("restClient:copyFromRefFailedWithError:"), EventArgs ("NSError")]
         void CopyFromRefFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:movedPath:pathto:"), EventArgs ("FilePathMetadata")]
         void PathMoved (DBRestClient client, string fromPath, DBMetadata result);
         
-        [Abstract]
         [Export ("restClient:movePathFailedWithError:"), EventArgs ("NSError")]
         void MovePathFailed (DBRestClient client, NSError error);
         
-        [Abstract]
         [Export ("restClient:loadedSearchResults:forPath:keyword:"), EventArgs ("SearchResults")]
         void SearchResultsLoaded (DBRestClient restClient, NSArray results, string path, string keyword);
         
-        [Abstract]
         [Export ("restClient:searchFailedWithError:"), EventArgs ("NSError")]
         void SearchFailed (DBRestClient restClient, NSError error);
         
-        [Abstract]
         [Export ("restClient:loadedSharableLink:forFile:"), EventArgs ("SharableLink")]
         void SharableLinkLoaded (DBRestClient restClient, string link, string path);
         
-        [Abstract]
         [Export ("restClient:loadSharableLinkFailedWithError:"), EventArgs ("NSError")]
         void LoadSharableLinkFailed (DBRestClient restClient, NSError error);
         
-        [Abstract]
         [Export ("restClient:loadedStreamableURL:forFile:"), EventArgs ("StreamableUrl")]
         void StreamableUrlLoaded (DBRestClient restClient, NSUrl url, string path);
         
-        [Abstract]
         [Export ("restClient:loadStreamableURLFailedWithError:"), EventArgs ("NSError")]
         void LoadStreamableUrlFailed (DBRestClient restClient, NSError error);
         
@@ -632,7 +575,6 @@ namespace DropboxSDK
     [BaseType (typeof (NSObject))]
     [Model]
     interface DBSessionDelegate {
-        [Abstract]
         [Export ("sessionDidReceiveAuthorizationFailure:userId:"), EventArgs ("UserId")]
         void AuthorizationFailureReceived (DBSession session, string userId);
         

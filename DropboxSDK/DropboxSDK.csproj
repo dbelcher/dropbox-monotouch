@@ -54,5 +54,6 @@
       <DependentUpon>libDropboxSDK.a</DependentUpon>
     </Compile>
     <Compile Include="Extra.cs" />
+    <Compile Include="DropboxException.cs" />
   </ItemGroup>
 </Project>
