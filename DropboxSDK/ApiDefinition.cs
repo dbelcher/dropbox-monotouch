@@ -561,7 +561,7 @@ namespace DropboxSDK
         void UnlinkUserId (string userId);
         
         [Export ("credentialStoreForUserId:")]
-        MPOAuthCredentialConcreteStore CredentialStoreForUserId (string userId);
+        MPOAuthCredentialConcreteStore CredentialStoreForUserId ([NullAllowed] string userId);
         
         [Export ("updateAccessToken:accessTokenSecret:forUserId:")]
         void UpdateAccessToken (string token, string secret, string userId);
