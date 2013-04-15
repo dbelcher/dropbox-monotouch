@@ -12,19 +12,19 @@ namespace DropboxSDK
         {
             var tcs = new TaskCompletionSource<DBMetadata> ();
             if (token.IsCancellationRequested) {
-                tcs.SetCanceled ();
+                tcs.TrySetCanceled ();
                 return tcs.Task;
             }
             
             BeginInvokeOnMainThread (() => {
                 if (token.IsCancellationRequested) {
-                    tcs.SetCanceled ();
+                    tcs.TrySetCanceled ();
                     return;
                 }
 
                 MetadataLoaded += (sender, e) => {
                     if (token.IsCancellationRequested) {
-                        tcs.SetCanceled ();
+                        tcs.TrySetCanceled ();
                         return;
                     }
                     tcs.TrySetResult (e.Metadata);
@@ -32,7 +32,7 @@ namespace DropboxSDK
 
                 LoadMetadataFailed += (sender, e) => {
                     if (token.IsCancellationRequested) {
-                        tcs.SetCanceled ();
+                        tcs.TrySetCanceled ();
                         return;
                     }
                     tcs.TrySetException (new DropboxException (e.Error));
@@ -40,7 +40,7 @@ namespace DropboxSDK
 
                 MetadataUnchangedAtPath += (sender, e) => {
                     if (token.IsCancellationRequested) {
-                        tcs.SetCanceled ();
+                        tcs.TrySetCanceled ();
                         return;
                     }
                     tcs.TrySetException (new DropboxException (null, HttpStatusCode.NotModified));
@@ -62,19 +62,19 @@ namespace DropboxSDK
         {
             var tcs = new TaskCompletionSource<DBMetadata> ();
             if (token.IsCancellationRequested) {
-                tcs.SetCanceled ();
+                tcs.TrySetCanceled ();
                 return tcs.Task;
             }
             
             BeginInvokeOnMainThread (() => {
                 if (token.IsCancellationRequested) {
-                    tcs.SetCanceled ();
+                    tcs.TrySetCanceled ();
                     return;
                 }
 
                 ThumbnailMetadataLoaded += (sender, e) => {
                     if (token.IsCancellationRequested) {
-                        tcs.SetCanceled ();
+                        tcs.TrySetCanceled ();
                         return;
                     }
                     tcs.TrySetResult (e.Metadata);
@@ -82,7 +82,7 @@ namespace DropboxSDK
                 
                 LoadThumbnailFailed += (sender, e) => {
                     if (token.IsCancellationRequested) {
-                        tcs.SetCanceled ();
+                        tcs.TrySetCanceled ();
                         return;
                     }
                     tcs.TrySetException (new DropboxException (e.Error));
@@ -125,7 +125,7 @@ namespace DropboxSDK
         {
             var tcs = new TaskCompletionSource<DBMetadata> ();
             if (token.IsCancellationRequested) {
-                tcs.SetCanceled ();
+                tcs.TrySetCanceled ();
                 return tcs.Task;
             }
             
@@ -133,28 +133,28 @@ namespace DropboxSDK
 
             BeginInvokeOnMainThread (() => {
                 if (token.IsCancellationRequested) {
-                    tcs.SetCanceled ();
+                    tcs.TrySetCanceled ();
                     return;
                 }
 
                 Delegate = new DBLoadFileRestClientDelegate {
                     OnFileMetadataLoaded = (_destPath, _contentType, _metadata) => {
                         if (token.IsCancellationRequested) {
-                            tcs.SetCanceled ();
+                            tcs.TrySetCanceled ();
                             return;
                         }
                         tcs.TrySetResult (_metadata);
                     },
                     OnLoadFileFailed = (_error) => {
                         if (token.IsCancellationRequested) {
-                            tcs.SetCanceled ();
+                            tcs.TrySetCanceled ();
                             return;
                         }
                         tcs.TrySetException (new DropboxException (_error));
                     },
                     OnLoadProgress = (_progress, _destPath) => {
                         if (token.IsCancellationRequested) {
-                            tcs.SetCanceled ();
+                            tcs.TrySetCanceled ();
                             return;
                         }
                         if (this.OnLoadProgress != null) this.OnLoadProgress (_progress, _destPath);
