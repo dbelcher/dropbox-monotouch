@@ -1,3 +1,0 @@
-[submodule "src/Native/dropbox-sdk-ios"]
-	path = src/Native/dropbox-sdk-ios
-	url = https://github.com/stampsy/dropbox-sdk-ios.git

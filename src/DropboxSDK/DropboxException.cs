@@ -4,17 +4,16 @@ using MonoTouch.Foundation;
 
 namespace DropboxSDK
 {
-    public class DropboxException: Exception
-    {
-        public HttpStatusCode StatusCode { get; private set; }
-        
-        public NSError Error { get; private set; }
-        
-        public DropboxException (NSError error, HttpStatusCode statusCode = HttpStatusCode.OK)
-        {
-            Error = error;
-            StatusCode = statusCode;
-        }
-    }
-}
+	public class DropboxException: Exception
+	{
+		public HttpStatusCode StatusCode { get; private set; }
 
+		public NSError Error { get; private set; }
+
+		public DropboxException (NSError error, HttpStatusCode statusCode = HttpStatusCode.OK)
+		{
+			Error = error;
+			StatusCode = statusCode;
+		}
+	}
+}
