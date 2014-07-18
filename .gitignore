@@ -104,3 +104,5 @@ Backup*/
 UpgradeLog*.XML
 Native/build/
 Native/build/iphoneos
+
+src/Native/dropbox-ios-sdk-1.3.11/

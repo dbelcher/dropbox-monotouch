@@ -4,7 +4,7 @@ set -e
 BUILDDIR=build
 PROJNAME=DropboxSDK
 
-PROJDIR=dropbox-ios-sdk-1.3.10/$PROJNAME
+PROJDIR=dropbox-ios-sdk-1.3.11/$PROJNAME
 MTPROJDIR=../$PROJNAME
 PROJ=$PROJNAME.xcodeproj
 TARGET=S$PROJNAME
